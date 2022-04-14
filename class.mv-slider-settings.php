@@ -15,14 +15,14 @@ if(!class_exists('MV_Slider_Settings')) {
             // Sections
             add_settings_section(
                 'mv_slider_main_section',
-                'How does is work',
+                esc_html__('How does is work', 'mv-slider'),
                 null,
                 'mv_slider_page1',
             );
 
             add_settings_section(
                 'mv_slider_second_section',
-                'Other Plugin Options',
+                esc_html__('Other Plugin Options', 'mv-slider'),
                 null,
                 'mv_slider_page2',
             );
@@ -30,7 +30,7 @@ if(!class_exists('MV_Slider_Settings')) {
             // Fields
             add_settings_field(
                 'mv_slider_sortcode',
-                'Shortcode',
+                esc_html__('Shortcode', 'mv-slider'),
                 [$this, 'mv_slider_shortcode_callback'],
                 'mv_slider_page1',
                 'mv_slider_main_section',
@@ -38,7 +38,7 @@ if(!class_exists('MV_Slider_Settings')) {
 
             add_settings_field(
                 'mv_slider_title',
-                'Slider Title',
+                esc_html__('Slider Title', 'mv-slider'),
                 [$this, 'mv_slider_title_callback'],
                 'mv_slider_page2',
                 'mv_slider_second_section',
@@ -49,7 +49,7 @@ if(!class_exists('MV_Slider_Settings')) {
 
             add_settings_field(
                 'mv_slider_bullets',
-                'Display Bullets',
+                esc_html__('Display Bullets', 'mv-slider'),
                 [$this, 'mv_slider_bullets_callback'],
                 'mv_slider_page2',
                 'mv_slider_second_section',
@@ -60,7 +60,7 @@ if(!class_exists('MV_Slider_Settings')) {
 
             add_settings_field(
                 'mv_slider_style',
-                'Slider Style',
+                esc_html__('Slider Style', 'mv-slider'),
                 [$this, 'mv_slider_style_callback'],
                 'mv_slider_page2',
                 'mv_slider_second_section',
@@ -73,7 +73,7 @@ if(!class_exists('MV_Slider_Settings')) {
 
         public function mv_slider_shortcode_callback() {
             ?>
-                <span>Use the [mv_slider] to display the slider in any page/post/widget</span>
+                <span><?php esc_html_e('Use the [mv_slider] to display the slider in any page/post/widget', 'mv-slider'); ?></span>
             <?php
         }
 
@@ -101,7 +101,7 @@ if(!class_exists('MV_Slider_Settings')) {
                         }
                     ?>
                 >
-                <label for="mv_slider_bullets">Whether to display bullets or not</label>
+                <label for="mv_slider_bullets"><?php esc_html_e('Whether to display bullets or not', 'mv-slider'); ?></label>
             <?php
         }
 

@@ -70,7 +70,19 @@ if(!class_exists('MV_Slider')) {
             unregister_post_type('mv-slider');
         }
 
-        public static function uninstall() {}
+        public static function uninstall() {
+            delete_option('mv_slider_options');
+
+            $posts = get_posts([
+                'post_type' => 'mv-slider',
+                'number_posts' => -1,
+                'post_status' => 'any'
+            ]);
+
+            foreach($posts as $post) {
+                wp_delete_post($post->ID, true);
+            }
+        }
 
         public function load_textdomain() {
             load_plugin_textdomain(
@@ -82,7 +94,7 @@ if(!class_exists('MV_Slider')) {
 
         public function add_menu() {
             add_menu_page(
-                'MV Slider Options',
+                esc_html__('MV Slider Options', 'mv-slider'),
                 'MV Slider',
                 'manage_options',
                 'mv_slider_admin',
@@ -93,8 +105,8 @@ if(!class_exists('MV_Slider')) {
 
             add_submenu_page(
                 'mv_slider_admin',
-                'Manage Slides',
-                'Manage Slides',
+                esc_html__('Manage Slides', 'mv-slider'),
+                esc_html__('Manage Slides', 'mv-slider'),
                 'manage_options',
                 'edit.php?post_type=mv-slider',
                 null,
@@ -103,8 +115,8 @@ if(!class_exists('MV_Slider')) {
 
             add_submenu_page(
                 'mv_slider_admin',
-                'Add New Slide',
-                'Add New Slide',
+                esc_html__('Add New Slide', 'mv-slider'),
+                esc_html__('Add New Slide', 'mv-slider'),
                 'manage_options',
                 'post-new.php?post_type=mv-slider',
                 null,
@@ -117,7 +129,7 @@ if(!class_exists('MV_Slider')) {
                 return;
             }
             if(isset($_GET['settings-updated'])) {
-                add_settings_error('mv_slider_options','mv_slider_message', 'Settings Saved', 'success');
+                add_settings_error('mv_slider_options','mv_slider_message', esc_html__('Settings Saved', 'mv-slider'), 'success');
             }
             settings_errors('mv_slider_options');
             
